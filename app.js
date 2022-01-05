@@ -24,13 +24,25 @@ const generatePage = require('./src/page-template.js');
 
 //     console.log('Portfolio complete! Checkout out index.html to see the output!');
 // });
+const promptUser = () => {
+  return inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'What is your name?'
+      },
+      {
+        type: 'input',
+        name: 'github',
+        message: 'Enter your Github Username:'
+      },
+      {
+        type: 'input',
+        name: 'about',
+        message: 'Provide some information about yourself:'
+      }
+    ]);
+};   
 
-inquirer
-  .prompt([
-    {
-      type: 'input',
-      name: 'name',
-      message: 'What is your name?'
-    }
-  ])
-  .then(answers => console.log(answers));
+promptUser().then(answers => console.log(answers));
