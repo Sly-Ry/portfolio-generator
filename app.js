@@ -64,7 +64,16 @@ const promptUser = () => {
       {
         type: 'input',
         name: 'about',
-        message: 'Provide some information about yourself:'
+        message: 'Provide some information about yourself for an "About" section?',
+        // when - allows us to write conditional code based on the answers the user has supplied thus far.
+        when: ({ confirmAbout}) => {
+          if (confirmAbout) {
+            return true;
+          }
+          else {
+            return false;
+          }
+        }
       }
     ]);
 };   
