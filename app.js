@@ -1,7 +1,7 @@
 // require' - allows the app.js file to access the fs module's functions through the fs assignment.
+// fs = file share - node stuff that is needed in order to create files
 const fs = require('fs');
 const inquirer = require('inquirer');
-const { template } = require('lodash');
 
 // first task: Generate a file
 const generatePage = require('./src/page-template.js');
@@ -143,7 +143,6 @@ Add a New Project
   })
 
 };
-
 //  Using mock(or dummy) data as the input, we can provide sample answers to structure the input data for the time being 
 const mockData = {
   name: 'Butt',
