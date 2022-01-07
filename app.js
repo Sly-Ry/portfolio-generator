@@ -143,6 +143,7 @@ Add a New Project
   })
 
 };
+
 //  Using mock(or dummy) data as the input, we can provide sample answers to structure the input data for the time being 
 const mockData = {
   name: 'Butt',
