@@ -1,6 +1,4 @@
-// require' - allows the app.js file to access the fs module's functions through the fs assignment.
-// fs = file share - node stuff that is needed in order to create files
-const fs = require('fs');
+const { writeFile, copyFile } = require('./utils/generate-site.js');
 const inquirer = require('inquirer');
 
 // first task: Generate a file
@@ -143,75 +141,70 @@ Add a New Project
   })
 
 };
-//  Using mock(or dummy) data as the input, we can provide sample answers to structure the input data for the time being 
-const mockData = {
-  name: 'Butt',
-  github: 'lernantino',
-  confirmAbout: true,
-  about:
-    'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et.',
-  projects: [
-    {
-      name: 'Run Buddy',
-      description:
-        'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
-      languages: ['HTML', 'CSS'],
-      link: 'https://github.com/lernantino/run-buddy',
-      feature: true,
-      confirmAddProject: true
-    },
-    {
-      name: 'Taskinator',
-      description:
-        'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
-      languages: ['JavaScript', 'HTML', 'CSS'],
-      link: 'https://github.com/lernantino/taskinator',
-      feature: true,
-      confirmAddProject: true
-    },
-    {
-      name: 'Taskmaster Pro',
-      description:
-        'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
-      languages: ['JavaScript', 'jQuery', 'CSS', 'HTML', 'Bootstrap'],
-      link: 'https://github.com/lernantino/taskmaster-pro',
-      feature: false,
-      confirmAddProject: true
-    },
-    {
-      name: 'Robot Gladiators',
-      description:
-        'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque.',
-      languages: ['JavaScript'],
-      link: 'https://github.com/lernantino/robot-gladiators',
-      feature: false,
-      confirmAddProject: false
-    }
-  ]
-};
 
-// promptUser()
-//   .then(promptProject)
-//   .then(portfolioData => {
-//     console.log(portfolioData);
-//     const pageHTML = generatePage(templateData);
-    const pageHTML = generatePage(mockData)
-//     // This... 
-//     // const [name, github] = profileDataArgs;
-//     // is the same as this.
-//     // {const name = profileDataArgs[0];
-//     // const github = profileDataArgs[1];}
+// //  Using mock(or dummy) data as the input, we can provide sample answers to structure the input data for the time being 
+// const mockData = {
+//   name: 'Butt',
+//   github: 'lernantino',
+//   confirmAbout: true,
+//   about:
+//     'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et.',
+//   projects: [
+//     {
+//       name: 'Run Buddy',
+//       description:
+//         'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
+//       languages: ['HTML', 'CSS'],
+//       link: 'https://github.com/lernantino/run-buddy',
+//       feature: true,
+//       confirmAddProject: true
+//     },
+//     {
+//       name: 'Taskinator',
+//       description:
+//         'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
+//       languages: ['JavaScript', 'HTML', 'CSS'],
+//       link: 'https://github.com/lernantino/taskinator',
+//       feature: true,
+//       confirmAddProject: true
+//     },
+//     {
+//       name: 'Taskmaster Pro',
+//       description:
+//         'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
+//       languages: ['JavaScript', 'jQuery', 'CSS', 'HTML', 'Bootstrap'],
+//       link: 'https://github.com/lernantino/taskmaster-pro',
+//       feature: false,
+//       confirmAddProject: true
+//     },
+//     {
+//       name: 'Robot Gladiators',
+//       description:
+//         'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque.',
+//       languages: ['JavaScript'],
+//       link: 'https://github.com/lernantino/robot-gladiators',
+//       feature: false,
+//       confirmAddProject: false
+//     }
+//   ]
+// };
 
-
-//     // The fs.writeFile() function definition has three arguments. 
-//     // 1. Name of the file/output data - ('index.html')
-//     // 2. Written data/the HTML string template - (generatePage(name, github))
-//     // 3. Callback function for error handling or success message - (err)
-    fs.writeFile('./index.html', pageHTML, err => {
-        // If an error exists, "error message" is displayed
-        if (err) throw err;
-
-        console.log('Portfolio complete! Checkout out index.html to see the output!');
-    });
-//   });
+promptUser()
+  .then(promptProject)
+  .then(portfolioData => {
+    return generatePage(portfolioData);
+  })
+  .then(pageHTML => {
+    return writeFile(pageHTML);
+  })
+  .then(writeFileResponse => {
+    console.log(writeFileResponse);
+    return copyFile();
+  })
+  .then(copyFileResponse => {
+    console.log(copyFileResponse);
+  })
+  .catch(err => {
+    console.log(err);
+  })
 
